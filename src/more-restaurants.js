@@ -29,7 +29,7 @@ function FoodRestaurant() {
 
       .then((res) => {
         // console.log(typeof res?.data?.data?.cards[0]);
-        setFoodRestaurants(res?.data?.data?.cards.slice(3));
+        setFoodRestaurants(res?.data?.data?.cards?.slice(3));
         setHeader(res?.data?.data?.cards[0]?.card?.card);
         // console.log(header)
       });
@@ -83,7 +83,7 @@ function FoodRestaurant() {
                   />
                   <div className="card-body">
                     <h6 className="card-title">
-                      {item?.card?.card?.info?.name}
+                      {item?.card?.card?.info?.name.slice(0,20)}
                     </h6>
                     <b className="card-text">
                       {" "}

@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function Menu() {
   const [menu, setMenu] = useState([]);
+  const [menuItems, setMenuItems] = useState(true);
   const params = useParams();
   // console.log(params)
   const navigate = useNavigate();
@@ -42,7 +43,8 @@ function Menu() {
           {menu?.map((item, i) => {
             return item?.card?.card?.itemCards ? (
               <div className="accordion-item" key={i}>
-                <h2 className="accordion-header">
+                {/* {console.log(item.card.card.itemCards )} */}
+       {     item?.card?.card?.itemCards?    <h2 className="accordion-header">
                   <button
                     className="accordion-button collapsed "
                     style={{ backgroundColor: "white" }}
@@ -54,7 +56,7 @@ function Menu() {
                   >
                     <b> {item?.card?.card?.title}</b>
                   </button>
-                </h2>
+                </h2>:""}
                 <div
                   id={`collapse${i}`}
                   className="accordion-collapse collapse "
@@ -70,6 +72,8 @@ function Menu() {
                               return item?.card?.info?.imageId &&
                                 item?.card?.info?.price ? (
                                 <div className="card menu-card" key={i}>
+                       
+                                  
                                   <img
                                     src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${item.card.info.imageId}`}
                                     className="card-img-top menu-img"
@@ -124,7 +128,7 @@ function Menu() {
                                         {item?.card?.info?.price / 100} /-{" "}
                                       </h6>
                                     ) : (
-                                      ""
+                                     <p>Not found</p>
                                     )}
                                     <p className="card-text">
                                       <span
@@ -194,7 +198,7 @@ function Menu() {
                                   </div>
                                 </div>
                               ) : (
-                                ""
+                                < p style={{margin:"60px"}}>Items Not Added yet :) </p>
                               );
                             })
                           : ""}

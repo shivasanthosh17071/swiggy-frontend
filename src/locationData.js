@@ -12,6 +12,8 @@ function LocationData({
   setLocations,
   yourLocation,
   setYourLocation,
+  currentLocation,
+  setCurrentLocation
 }) {
   const dispatch = useDispatch();
 
@@ -19,6 +21,32 @@ function LocationData({
     <>
       {/* <div className="location-input"> {yourLocation.slice(0,40)}..</div> */}
       <div className="location-div-in">
+      <button style={{color:"gray",textAlign:"left"}} className="location-input" onClick={()=>{
+            if (!navigator.geolocation) {
+             // setLocation("Geolocation is not supported by your browser.");
+             return;
+           }
+         
+           navigator.geolocation.getCurrentPosition(
+             (position) => {
+               const { latitude, longitude } = position.coords;
+              
+               console.log(position)
+               setCurrentLocation({lat: `${latitude}` , lng: `${longitude}`})
+               console.log(currentLocation)
+               
+               dispatch(clearG());
+                dispatch(setG(currentLocation));
+           dispatch(deleteLoc());
+           setYourLocation("area")
+         
+             },
+             (error) => {
+               console.log(error)
+             }
+           );
+         
+               }}>Auto detect my location</button>
         <input
           value={suggetions}
           onChange={(e) => {
@@ -27,7 +55,9 @@ function LocationData({
           className="location-input"
           placeholder="Search your city"
         ></input>
-
+        {/*  */}
+          
+        {/*  */}
         {suggetions != "" && suggetions?.length >= 3
           ? locations?.map((item, i) => {
               // console.log(item.description)
@@ -49,6 +79,7 @@ function LocationData({
                         console.log(res.data.data[0].geometry.location);
                         // setGeoLocation(res?.data?.data[0]?.geometry?.location)
                         // setLocations([])
+                        // console.log(res?.data?.data[0]?.geometry?.location)
                         setSuggetions("");
                         setYourLocation(item?.description);
                         dispatch(deleteLoc());

@@ -11,18 +11,27 @@ import TopRestaurants from "./topRestruantsSection";
 import Loader from "./loader";
 import LocationError from "./locationnotfound";
 import Footer from "./footer";
-import { useSelector } from "react-redux";
+import { useSelector , useDispatch } from "react-redux";
+import { addLoc, clearG, deleteLoc, setG } from "./reducer";
+
 function Home() {
   const [topRestaurants, setTopRestaurants] = useState([]);
   const [suggetions, setSuggetions] = useState("");
+
   const [locations, setLocations] = useState([]);
+  const [currentLocation,setCurrentLocation] =useState({lat:"", lng:""})
   // const [geoLocation,setGeoLocation]=useState({ lat : "17.4357403", lng : "78.4401809"})
   const [forYou, setForYou] = useState([]);
   const [yourLocation, setYourLocation] = useState("hyderabad");
   const navigate = useNavigate();
+   const dispatch = useDispatch();
   const geo = useSelector((state) => {
     return state.geo;
   });
+
+console.log(geo)
+
+
   // apis
   //top rest
   //https://www.swiggy.com/dapi/restaurants/list/v5?lat=${geo[0].lat}&lng=${geo[0].lng}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING
@@ -86,6 +95,9 @@ function Home() {
     }
   }, [suggetions]);
 
+
+ 
+
   return (
     <>
       {/* <div style={{display:"none"}}><Header yourLocation={yourLocation}/></div> */}
@@ -110,6 +122,9 @@ function Home() {
             >
               Location <i className="bi bi-chevron-compact-down"></i>
             </button>
+            <div style={{ padding: '20px' }}>
+     
+    </div>
 
             <div
               className="offcanvas offcanvas-start"
@@ -141,6 +156,8 @@ function Home() {
                   //  geoLocation={geoLocation}
                   yourLocation={yourLocation}
                   setYourLocation={setYourLocation}
+                  setCurrentLocation={setCurrentLocation}
+                  currentLocation={currentLocation}
                 />
               </div>
             </div>
@@ -160,7 +177,7 @@ function Home() {
             </h2>
 
             <div className=" fav-restaurants">
-              {forYou.map((item, i) => {
+              {forYou?.map((item, i) => {
                 // console.log(item)
                 return (
                   <div
@@ -168,7 +185,7 @@ function Home() {
                     key={i}
                     onClick={() => {
                       navigate(
-                        `/Open/${item.action?.text}/${item.entityId.slice(
+                        `/Open/${item?.action?.text}/${item?.entityId?.slice(
                           36,
                           41
                         )}`
@@ -193,7 +210,7 @@ function Home() {
                 wordSpacing: "0.5px",
               }}
             >
-              Top restaurant chains in {yourLocation?.slice(0, 40)}
+              Top restaurant  {yourLocation!= "" ? `chains in your ${yourLocation?.slice(0, 40)}`:", here"}
             </h2>
             <div className=" fav-restaurants1">
               {topRestaurants.length > 0 ? (
