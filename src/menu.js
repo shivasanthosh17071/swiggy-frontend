@@ -24,7 +24,7 @@ function Menu() {
         params: { restId: params.restId },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setMenu(
           res?.data?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.slice(
             1

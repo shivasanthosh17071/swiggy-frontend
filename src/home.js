@@ -41,10 +41,7 @@ function Home() {
         params: { lat: geo[0].lat, lng: geo[0].lng },
       })
       .then((res) => {
-        // console.log(
-          res.data.data.cards[1].card.card.gridElements.infoWithStyle
-            .restaurants
-        );
+        // console.log( res.data.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
         if (res?.data?.data?.cards[1]?.card?.card?.gridElements) {
           setTopRestaurants(
             res?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle

@@ -31,9 +31,9 @@ function LocationData({
              (position) => {
                const { latitude, longitude } = position.coords;
               
-               console.log(position)
+              //  console.log(position)
                setCurrentLocation({lat: `${latitude}` , lng: `${longitude}`})
-               console.log(currentLocation)
+              //  console.log(currentLocation)
                
                dispatch(clearG());
                 dispatch(setG(currentLocation));
@@ -42,7 +42,7 @@ function LocationData({
          
              },
              (error) => {
-               console.log(error)
+              //  console.log(error)
              }
            );
          
@@ -76,7 +76,7 @@ function LocationData({
                         `
                       )
                       .then((res) => {
-                        console.log(res.data.data[0].geometry.location);
+                        // console.log(res.data.data[0].geometry.location);
                         // setGeoLocation(res?.data?.data[0]?.geometry?.location)
                         // setLocations([])
                         // console.log(res?.data?.data[0]?.geometry?.location)
