@@ -29,7 +29,7 @@ function Home() {
     return state.geo;
   });
 
-console.log(geo)
+// console.log(geo)
 
 
   // apis
@@ -41,7 +41,7 @@ console.log(geo)
         params: { lat: geo[0].lat, lng: geo[0].lng },
       })
       .then((res) => {
-        console.log(
+        // console.log(
           res.data.data.cards[1].card.card.gridElements.infoWithStyle
             .restaurants
         );
@@ -77,21 +77,21 @@ console.log(geo)
   useEffect(() => {
     try {
       if (suggetions !== "") {
-        console.log("hi");
+        // console.log("hi");
         axios
           .get(`https://swiggy-backend-gwfo.onrender.com/${suggetions}/suggetions`)
           .then((res) => {
-            console.log(res.data.data);
+            // console.log(res.data.data);
             if (res.data.data) {
               setLocations(res?.data?.data);
             }
           })
           .catch((err) => {
-            console.log(err);
+            // console.log(err);
           });
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }, [suggetions]);
 

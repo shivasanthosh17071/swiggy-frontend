@@ -63,7 +63,7 @@ function FoodRestaurant() {
         {/* {console.log(header)} */}
 
         <div className=" Food-restaurants  ">
-          {foodRestaurants.length > 0 ? (
+          {foodRestaurants?.length > 0 ? (
             foodRestaurants?.map((item, i) => {
               return (
                 <div
